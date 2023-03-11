@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lenovo
  */
-public class pokemon extends javax.swing.JFrame {
+public class Pokedex extends javax.swing.JFrame {
 
     
      
     /**
      * Creates new form pokemon
      */
-    public pokemon() {
+    public Pokedex() {
         initComponents();
     }
 
@@ -110,6 +110,11 @@ public class pokemon extends javax.swing.JFrame {
         });
 
         jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Update");
 
@@ -143,7 +148,7 @@ public class pokemon extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addGap(34, 34, 34)
                         .addComponent(jButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -176,9 +181,9 @@ public class pokemon extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,11 +210,7 @@ public class pokemon extends javax.swing.JFrame {
         selectedPok = sq.getText();
         }
         
-         
-       
-        
-        
-        String data[] = {jcbox.getSelectedItem()+"",txtlevel.getText(),selectedPok};
+        String data[] = {selectedPok,jcbox.getSelectedItem()+"",txtlevel.getText()};
         DefaultTableModel pokeTable = (DefaultTableModel) pokedex.getModel();
         pokeTable.addRow(data);
         jcbox.setSelectedItem("");
@@ -233,6 +234,27 @@ public class pokemon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sqActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+      
+        int selectedRow = pokedex.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+        } else {
+            String name = pokedex.getValueAt(selectedRow, 0).toString();
+            String shiny =  pokedex.getValueAt(selectedRow, 1).toString();
+            String level =  pokedex.getValueAt(selectedRow, 2).toString();
+            
+            DefaultTableModel pokeTable = (DefaultTableModel) pokedex.getModel();
+            pokeTable.removeRow(selectedRow);
+    }//GEN-LAST:event_jButton2ActionPerformed
+          
+    
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -250,21 +272,22 @@ public class pokemon extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pokedex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pokedex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pokedex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pokedex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
          
             
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new pokemon().setVisible(true);
+                new Pokedex().setVisible(true);
                 
             }
         });
